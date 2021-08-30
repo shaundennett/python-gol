@@ -1,6 +1,8 @@
 import numpy as np
 import random
 
+from pygame.constants import QUIT
+
 
 class Game_of_life_model():
 
@@ -17,7 +19,8 @@ class Game_of_life_model():
         self.cols = cols
         self.rows = rows
         self.max = self.cols * self.rows
-        self.offsets = [(-1, -1),
+        self.offsets = [
+                (-1, -1),
                 (-1, 0),
                 (-1, 1),
                 (0, -1),
@@ -28,12 +31,12 @@ class Game_of_life_model():
                 ]
         self.base = np.zeros(self.max,dtype='i')
         for x in range(self.max):
-            if random.randint(0, 9) % 4 == 0:
+            if random.randint(0, 100) % 3 == 0:
                 self.base[x] = 1
 
         self.grid = self.base.reshape(self.rows, self.cols)        
 
-    def check_cells(self):
+    def check_cells(self) -> np.array:
         '''
         Iterate through the grid and apply the rules to create a replacement grid
 
@@ -43,32 +46,44 @@ class Game_of_life_model():
         '''
         counter = 0
         replacememt_grid = np.zeros(self.max,dtype='i').reshape(self.rows, self.cols)
-        for i in range(self.rows):
-            
+        for i in range(self.rows):            
             for j in range(self.cols):
-               dead = False
-               counter = 0
+                dead = False
+                counter = 0
                 # apply the rules by checking the offets for the current position
-               for offset in self.offsets:
-                   x_offset = i + offset[0]
-                   y_offset = j + offset[1]
-                   value = 0
-                   if x_offset < 0 or x_offset > self.rows -1 or y_offset < 0 or y_offset > self.cols -1:
-                      value = 0
-                   else:
-                      value = self.grid[x_offset, y_offset]
-                   if value == 1:
-                      counter = counter + 1
-                        #print(counter)
-                   if counter > 3:
-                      dead = True
-                      break
+                for offset in self.offsets:
+                    x_offset = i + offset[0]
+                    y_offset = j + offset[1]
             
-               if not dead and counter >= 2 and counter <= 3:
-                  replacememt_grid[i,j] = 1
-               else:
-                  replacememt_grid[i,j] = 0
+                    value = 0
+                    if x_offset < 0 or x_offset > self.rows -1 or y_offset < 0 or y_offset > self.cols -1:
+                        value = 0
+                    else:
+                        value = self.grid[x_offset, y_offset]
+                    if value == 1:
+                        counter = counter + 1
+                        #print(counter)
+                    if counter > 3:
+                        dead = True
+                        break
+                if not dead:
+                    if self.grid[i,j] == 1:        
+                        if counter >= 2 and counter <= 3:
+                            replacememt_grid[i,j] = 1
+                        else:
+                            replacememt_grid[i,j] = 0
+                    else:
+                        if counter == 3:
+                            replacememt_grid[i,j] = 1
+                        else:
+                            replacememt_grid[i,j] = 0
+                    
+                else:
+                    replacememt_grid[i,j] = 0
+                #print("cell" + str(i) + ":" + str(j) + " current " + str(self.grid[i,j]) + " live cells " + str(counter) + " dead " + str(dead) + " final decision " + str(replacememt_grid[i,j]))
+               
         self.grid = replacememt_grid.copy()
+        return self.grid
             
     def display_grid(self):
         display_array = self.grid.astype("i")
@@ -81,7 +96,7 @@ class Game_of_life_model():
         print("\n")
 
 if __name__ == "__main__":
-   game = Game_of_life_model(10,10) 
+   game = Game_of_life_model(20,20) 
    game.display_grid()  
    game.check_cells()
    game.display_grid() 
