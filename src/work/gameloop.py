@@ -13,7 +13,8 @@ from pygame.locals import (
     QUIT,
 )
 
-class GameLoop():
+
+class GameLoop:
 
     # Define constants for the screen width and height
     SCREEN_WIDTH = 800
@@ -27,7 +28,7 @@ class GameLoop():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     # Instantiate the objects
-    #player = Player()
+    # player = Player()
 
     # Variable to keep the main loop running
     running = True
@@ -41,8 +42,8 @@ class GameLoop():
         screen.fill((0, 0, 0))
 
         # Draw the objects on the screen
-        
-        #screen.blit(player.surf, player.rect)
+
+        # screen.blit(player.surf, player.rect)
 
         # Update the display
         pygame.display.flip()
@@ -53,10 +54,11 @@ class GameLoop():
             if event.type == KEYDOWN:
                 # Was it the Escape key? If so, stop the loop.
                 if event.key == K_ESCAPE:
-                    self.running = False       
+                    self.running = False
             # Did the user click the window close button? If so, stop the loop.
             elif event.type == QUIT:
                 self.running = False
+
 
 if __name__ == "__main__":
     game = GameLoop()
