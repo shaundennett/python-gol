@@ -12,34 +12,38 @@ from pygame.locals import (
     KEYDOWN,
     QUIT,
 )
+screen = None
+running = True
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 
 
 class GameLoop:
 
-    # Define constants for the screen width and height
-    SCREEN_WIDTH = 800
-    SCREEN_HEIGHT = 600
+        # Initialize pygame
+        pygame.init()
 
-    # Initialize pygame
-    pygame.init()
+        # Create the screen object
+        # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    # Create the screen object
-    # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        # Instantiate the objects
+        #player = Player()
+        self.main()
 
     # Instantiate the objects
     # player = Player()
 
-    # Variable to keep the main loop running
-    running = True
+        while self.running:
+            # Look at every event in the queue
+            self.manage_events()
 
-    # Main loop
-    while running:
-        # Look at every event in the queue
-        self.manage_events()
+            # Fill the screen with black
+            self.screen.fill((0, 0, 0))
 
-        # Fill the screen with black
-        screen.fill((0, 0, 0))
+            # Draw the objects on the screen
+            
+            #screen.blit(player.surf, player.rect)
 
         # Draw the objects on the screen
 
@@ -57,6 +61,7 @@ class GameLoop:
                     self.running = False
             # Did the user click the window close button? If so, stop the loop.
             elif event.type == QUIT:
+                print("Quit")
                 self.running = False
 
 
