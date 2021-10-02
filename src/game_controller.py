@@ -2,7 +2,8 @@ import numpy as np
 import pygame
 import core.model as gol_model
 import core.game_view as gol_view
-
+import core.widgets as widgets
+from PIL import Image as image
 
 class GameController:
 
@@ -14,15 +15,18 @@ class GameController:
     BLACK = (0, 0, 0)
     GREEN = (0, 255, 0)
     WHITE = (255, 255, 255)
-
+    image = None
     model = None
     view = None
-
+    
     def __init__(self):
         pygame.init()
         self.model = gol_model.Game_of_life_model(self.cols, self.rows)
         self.view = gol_view.GameView(self.model, pygame)
 
+        button_image = pygame.image.load("src\\images\\b_stop.png")
+    
+        self.view.add_button(100,100,100,100,button_image)
         self.main_loop()
 
     def main_loop(self):
