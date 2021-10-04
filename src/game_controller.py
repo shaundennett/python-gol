@@ -15,10 +15,7 @@ class GameController:
     BLACK = (0, 0, 0)
     GREEN = (0, 255, 0)
     WHITE = (255, 255, 255)
-    image = None
-    model = None
-    view = None
-    
+
     def __init__(self):
         pygame.init()
         self.model = gol_model.Game_of_life_model(self.cols, self.rows)

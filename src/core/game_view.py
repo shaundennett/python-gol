@@ -37,6 +37,12 @@ class GameView:
         self.button = widgets.Button(x, y, height, width, image, self.pygame, self.screen)
         self.buttons.add(self.button)
 
+    def create_button_section(self):
+        pass
+
+        
+
+
     def create_grid(self):
 
         pos_x = 0

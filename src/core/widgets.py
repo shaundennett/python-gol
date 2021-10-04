@@ -10,29 +10,27 @@ class Button(pygame.sprite.Sprite):
     colour = (255, 255, 255)
     command = None
 
-    def __init__(self, xpos, ypos, width, height, image, pygame, screen):
+    def __init__(self, xpos, ypos, width, height, image, pygame):
 
         super().__init__()
 
-        self.screen = screen
         self.pygame = pygame
         self.xpos = xpos
         self.ypos = ypos
         self.image = pygame.transform.scale(image, (width, height))
         self.rect = self.image.get_rect()
-        # image = image.resize((500,500),Image.ANTIALIAS)
         self.rect.topleft = (xpos, ypos)
     
     def addCommand(self, command):
         self.command = command
 
     def update(self):
-        self.xpos = self.xpos + 0.01
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
         self.rect.topleft = (self.xpos, self.ypos)
+        self.check_events()        
 
-    #def draw(self, screen):
-    #    
-    #    self.screen.blit(self.image, (self.xpos, self.ypos))
-
-    def on_click(self, event):
-        pass
+    def check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print("clicked")
