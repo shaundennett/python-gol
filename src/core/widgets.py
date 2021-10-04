@@ -1,6 +1,5 @@
 import pygame
 from PIL import Image
-import os
 
 class Button(pygame.sprite.Sprite):
 
@@ -10,28 +9,30 @@ class Button(pygame.sprite.Sprite):
     height = 0
     colour = (255, 255, 255)
     command = None
-    buttonGroup = None
-    pygame = None
-    imageName = None
-    image = None
 
-    def __init__(self, xpos, ypos, width, height, image, pygame):
+    def __init__(self, xpos, ypos, width, height, image, pygame, screen):
 
         super().__init__()
+
+        self.screen = screen
         self.pygame = pygame
         self.xpos = xpos
         self.ypos = ypos
-
-        self.image = image
+        self.image = pygame.transform.scale(image, (width, height))
         self.rect = self.image.get_rect()
         # image = image.resize((500,500),Image.ANTIALIAS)
-
+        self.rect.topleft = (xpos, ypos)
+    
     def addCommand(self, command):
         self.command = command
 
     def update(self):
-        self.pygame.blit(self.image, self.rect)
+        self.xpos = self.xpos + 0.01
+        self.rect.topleft = (self.xpos, self.ypos)
 
+    #def draw(self, screen):
+    #    
+    #    self.screen.blit(self.image, (self.xpos, self.ypos))
 
-    def on_click(event):
+    def on_click(self, event):
         pass

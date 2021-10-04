@@ -18,14 +18,14 @@ class GameView:
 
     model = None
     pygame = None
-
+    screen = None
     button = None
     buttons = None
 
     def __init__(self, model, game):
 
         self.pygame = game
-        self.screen = pygame.display.set_mode([500, 700])
+        self.screen = pygame.display.set_mode((500, 700))
         ## calculate the box sizes
         self.box_x = 500 / self.cols
         self.box_y = 500 / self.rows
@@ -34,7 +34,7 @@ class GameView:
 
     def add_button(self, x, y, height, width, image):
 
-        self.button = widgets.Button(x, y, height, width , image, self.screen)
+        self.button = widgets.Button(x, y, height, width, image, self.pygame, self.screen)
         self.buttons.add(self.button)
 
     def create_grid(self):
@@ -62,12 +62,14 @@ class GameView:
     def draw(self):
         self.screen.fill(self.BLACK)
         self.create_grid()
-        self.show_buttons()
+        self.buttons.update()
+        self.buttons.draw(self.screen)
+        # self.show_buttons(self.screen)
         # Flip the display
         pygame.display.flip()
     
-    def show_buttons(self):
-        self.buttons.update()
+    def show_buttons(self, screen):
+        self.button.draw(screen)
 
 if __name__ == "__main__":
     worker = GameView()

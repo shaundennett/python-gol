@@ -1,69 +1,35 @@
-# Import the pygame module
-import pygame
+import sys
+import pygame as pg
 
-# Import pygame.locals for easier access to key coordinates
-# Updated to conform to flake8 and black standards
-from pygame.locals import (
-    K_UP,
-    K_DOWN,
-    K_LEFT,
-    K_RIGHT,
-    K_ESCAPE,
-    KEYDOWN,
-    QUIT,
-)
-screen = None
-running = True
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+pg.init()
+screen = pg.display.set_mode((640, 480))
+
+IMAGE = pg.image.load("src\\images\\b_stop.png")
+##IMAGE.fill(pg.Color('sienna2'))
+##screen.draw(IMAGE, (50, 30))
+# New width and height will be (50, 30).
+IMAGE_SMALL = pg.transform.scale(IMAGE, (50, 30))
+# Rotate by 0 degrees, multiply size by 2.
+IMAGE_BIG = pg.transform.rotozoom(IMAGE, 0, 2)
 
 
-class GameLoop:
+def main():
+    clock = pg.time.Clock()
+    done = False
+    while not done:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                done = True
 
-        # Initialize pygame
-        pygame.init()
-
-        # Create the screen object
-        # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-        # Instantiate the objects
-        #player = Player()
-        self.main()
-
-    # Instantiate the objects
-    # player = Player()
-
-        while self.running:
-            # Look at every event in the queue
-            self.manage_events()
-
-            # Fill the screen with black
-            self.screen.fill((0, 0, 0))
-
-            # Draw the objects on the screen
-            
-            #screen.blit(player.surf, player.rect)
-
-        # Draw the objects on the screen
-
-        # screen.blit(player.surf, player.rect)
-
-        # Update the display
-        pygame.display.flip()
-
-    def manage_events(self):
-        for event in pygame.event.get():
-            # Did the user hit a key?
-            if event.type == KEYDOWN:
-                # Was it the Escape key? If so, stop the loop.
-                if event.key == K_ESCAPE:
-                    self.running = False
-            # Did the user click the window close button? If so, stop the loop.
-            elif event.type == QUIT:
-                print("Quit")
-                self.running = False
+        screen.fill(pg.Color('gray15'))
+        screen.blit(IMAGE, (50, 50))
+        screen.blit(IMAGE_SMALL, (50, 155))
+        screen.blit(IMAGE_BIG, (50, 230))
+        pg.display.flip()
+        clock.tick(30)
 
 
-if __name__ == "__main__":
-    game = GameLoop()
+if __name__ == '__main__':
+    main()
+    pg.quit()
+    sys.exit()
