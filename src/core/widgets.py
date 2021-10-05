@@ -27,10 +27,12 @@ class Button(pygame.sprite.Sprite):
     def update(self):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
-        self.rect.topleft = (self.xpos, self.ypos)
-        self.check_events()        
 
-    def check_events(self):
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                print("clicked")
+        self.rect.topleft = (self.xpos, self.ypos)
+        if click == (1,0,0):
+            print(mouse)
+            self.check_events(mouse)        
+
+    def check_events(self, mouse):
+       if pygame.Rect.collidepoint(self.rect, mouse):
+          print("clicked")

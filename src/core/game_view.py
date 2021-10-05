@@ -31,16 +31,18 @@ class GameView:
         self.box_y = 500 / self.rows
         self.model = model
         self.buttons = pygame.sprite.Group()
-
+        button_image = pygame.image.load("src\\images\\button_stop.png")
+    
+        self.add_button(10, 520, 80, 30, button_image)
     def add_button(self, x, y, height, width, image):
 
-        self.button = widgets.Button(x, y, height, width, image, self.pygame, self.screen)
+        self.button = widgets.Button(x, y, height, width, image, self.pygame)
         self.buttons.add(self.button)
 
     def create_button_section(self):
         pass
 
-        
+
 
 
     def create_grid(self):

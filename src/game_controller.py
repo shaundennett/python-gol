@@ -21,9 +21,7 @@ class GameController:
         self.model = gol_model.Game_of_life_model(self.cols, self.rows)
         self.view = gol_view.GameView(self.model, pygame)
 
-        button_image = pygame.image.load("src\\images\\b_stop.png")
-    
-        self.view.add_button(10, 520, 50, 40, button_image)
+
         self.main_loop()
 
     def main_loop(self):
