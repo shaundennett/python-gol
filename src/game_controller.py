@@ -20,9 +20,17 @@ class GameController:
         pygame.init()
         self.model = gol_model.Game_of_life_model(self.cols, self.rows)
         self.view = gol_view.GameView(self.model, pygame)
-
-
         self.main_loop()
+
+    def setup_event_listeners():
+        pass
+
+    def start_clicked():
+        pass
+    def stop_clicked():
+        pass
+    def reset_clicked():
+        pass
 
     def main_loop(self):
         running = True
@@ -36,7 +44,7 @@ class GameController:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     draw = True
-
+            self.model.check_cells()
           
             # pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
             draw = True

@@ -33,16 +33,21 @@ class GameView:
         self.buttons = pygame.sprite.Group()
         button_image = pygame.image.load("src\\images\\button_stop.png")
     
-        self.add_button(10, 520, 80, 30, button_image)
-    def add_button(self, x, y, height, width, image):
-
-        self.button = widgets.Button(x, y, height, width, image, self.pygame)
-        self.buttons.add(self.button)
+        self.create_button_section()
 
     def create_button_section(self):
-        pass
 
-
+        button_stop_img = pygame.image.load("src\\images\\button_stop.png")
+        button_start_img = pygame.image.load("src\\images\\button_start.png")
+        button_reset_img = pygame.image.load("src\\images\\button_reset.png")
+                
+        self.button_stop = widgets.Button(10, 520, 80, 30, button_start_img, self.pygame)
+        self.button_start = widgets.Button(110, 520, 80, 30, button_stop_img, self.pygame)
+        self.button_reset = widgets.Button(210, 520, 80, 30, button_reset_img, self.pygame)
+        
+        self.buttons.add(self.button_stop,
+                 self.button_start,
+                 self.button_reset)
 
 
     def create_grid(self):
@@ -50,7 +55,7 @@ class GameView:
         pos_x = 0
         pos_y = 0
         colour = self.GREEN
-        grid = self.model.check_cells()
+        grid = self.model.grid
         for i in range(self.rows):
             for j in range(self.cols):
                 if grid[i, j] == 1:
