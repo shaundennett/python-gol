@@ -100,6 +100,21 @@ class Game_of_life_model:
 
         print("\n")
 
+    def clear_grid(self):
+        self.base = np.zeros(self.max, dtype="i")
+        self.grid = self.base.reshape(self.rows, self.cols)
+   
+    def randomize_grid(self):
+        self.base = np.zeros(self.max, dtype="i")
+        for x in range(self.max):
+            if random.randint(0, 100) % 3 == 0:
+                self.base[x] = 1
+
+        self.grid = self.base.reshape(self.rows, self.cols)
+    
+    def set_grid_point(self,x , y):
+        self.grid[x][y] = 1
+
 
 if __name__ == "__main__":
     game = Game_of_life_model(20, 20)

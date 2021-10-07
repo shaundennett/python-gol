@@ -41,13 +41,12 @@ class GameView:
         button_start_img = pygame.image.load("src\\images\\button_start.png")
         button_reset_img = pygame.image.load("src\\images\\button_reset.png")
                 
-        self.button_stop = widgets.Button(10, 520, 80, 30, button_start_img, self.pygame)
-        self.button_start = widgets.Button(110, 520, 80, 30, button_stop_img, self.pygame)
+        self.button_start_stop = widgets.Button_toggler(10, 520, 80, 30, [button_start_img, button_stop_img], self.pygame)
+        # self.button_start = widgets.Button(110, 520, 80, 30, button_stop_img, self.pygame)
         self.button_reset = widgets.Button(210, 520, 80, 30, button_reset_img, self.pygame)
         
-        self.buttons.add(self.button_stop,
-                 self.button_start,
-                 self.button_reset)
+        self.buttons.add(self.button_reset,
+                 self.button_start_stop)
 
 
     def create_grid(self):
@@ -60,11 +59,11 @@ class GameView:
             for j in range(self.cols):
                 if grid[i, j] == 1:
                     pygame.draw.rect(
-                        self.screen, colour, (pos_x, pos_y, self.box_x, self.box_y), 1
+                        self.screen, colour, (pos_x, pos_y, self.box_x, self.box_y)
                     )
                 else:
                     pygame.draw.rect(
-                        self.screen, colour, (pos_x, pos_y, self.box_x, self.box_y)
+                        self.screen, colour, (pos_x, pos_y, self.box_x, self.box_y), 1
                     )
 
                 # pygame.display.flip()
