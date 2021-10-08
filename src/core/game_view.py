@@ -25,7 +25,7 @@ class GameView:
     def __init__(self, model, game):
 
         self.pygame = game
-        self.screen = pygame.display.set_mode((500, 700))
+        self.screen = pygame.display.set_mode((500, 600))
         ## calculate the box sizes
         self.box_x = 500 / self.cols
         self.box_y = 500 / self.rows
@@ -42,8 +42,7 @@ class GameView:
         button_reset_img = pygame.image.load("src\\images\\button_reset.png")
                 
         self.button_start_stop = widgets.Button_toggler(10, 520, 80, 30, [button_start_img, button_stop_img], self.pygame)
-        # self.button_start = widgets.Button(110, 520, 80, 30, button_stop_img, self.pygame)
-        self.button_reset = widgets.Button(210, 520, 80, 30, button_reset_img, self.pygame)
+        self.button_reset = widgets.Button(100, 520, 80, 30, button_reset_img, self.pygame)
         
         self.buttons.add(self.button_reset,
                  self.button_start_stop)

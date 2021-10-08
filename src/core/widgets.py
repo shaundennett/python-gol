@@ -69,7 +69,7 @@ class Button_toggler(pygame.sprite.Sprite):
         self.toggles = len(image_names) -1
         for image_name in image_names:
             self.images.append(pygame.transform.scale(image_name, (width, height)))
-        self.current_state = 1
+        self.current_state = 0
 
     
     def add_command(self, command):

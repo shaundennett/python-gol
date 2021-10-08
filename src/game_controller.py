@@ -46,7 +46,8 @@ class GameController:
     def main_loop(self):
         running = True
         clock = pygame.time.Clock()
-        self.draw = True
+        self.draw = False
+        self.view.draw()
         while running:
 
             # Did the user click the window close button?
