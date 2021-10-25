@@ -21,7 +21,7 @@ def main():
             if event.type == pg.QUIT:
                 done = True
 
-        screen.fill(pg.Color('gray15'))
+        screen.fill(pg.Color("gray15"))
         screen.blit(IMAGE, (50, 50))
         screen.blit(IMAGE_SMALL, (50, 155))
         screen.blit(IMAGE_BIG, (50, 230))
@@ -29,7 +29,7 @@ def main():
         clock.tick(30)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
     pg.quit()
     sys.exit()

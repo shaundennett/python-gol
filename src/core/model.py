@@ -1,7 +1,10 @@
 import numpy as np
 import random
+import math
 
 from pygame.constants import QUIT
+
+from core.widgets import current_milli_time
 
 
 class Game_of_life_model:
@@ -11,6 +14,7 @@ class Game_of_life_model:
     max = 0
     offsets = []
     base = np.array(0)
+    last_grid = (0, 0)
 
     def __init__(self, cols, rows):
         """
@@ -103,7 +107,7 @@ class Game_of_life_model:
     def clear_grid(self):
         self.base = np.zeros(self.max, dtype="i")
         self.grid = self.base.reshape(self.rows, self.cols)
-   
+
     def randomize_grid(self):
         self.base = np.zeros(self.max, dtype="i")
         for x in range(self.max):
@@ -111,9 +115,15 @@ class Game_of_life_model:
                 self.base[x] = 1
 
         self.grid = self.base.reshape(self.rows, self.cols)
-    
-    def set_grid_point(self,x , y):
-        self.grid[x][y] = 1
+
+    def set_grid_point(self, pos):
+        pass
+
+    def change_cell(self, pos):
+
+        current_cell_value = self.grid[pos[0]][pos[1]]
+
+        self.grid[pos[0]][pos[1]] = abs(current_cell_value - 1)
 
 
 if __name__ == "__main__":
