@@ -42,9 +42,9 @@ class GameView:
         button_stop_img = pygame.image.load("src\\images\\button_stop.png")
         button_start_img = pygame.image.load("src\\images\\button_start.png")
         button_reset_img = pygame.image.load("src\\images\\button_reset.png")
-        self.button_random_enabled_img = pygame.image.load("src\\images\\button_random_active.png").convert_alpha()
-        self.button_random_enabled_img.set_alpha(50)
-
+        button_random_enabled_img = pygame.image.load("src\\images\\button_random_active.png")
+        button_random_disabled_img = pygame.image.load("src\\images\\button_random_inactive.png")
+       
         self.button_start_stop = widgets.Button_toggler(
             10, 520, 80, 30, [button_start_img, button_stop_img], self.pygame
         )
@@ -52,8 +52,9 @@ class GameView:
             100, 520, 80, 30, [button_reset_img], self.pygame
         )
         self.button_random = widgets.Button_toggler(
-            200, 520, 80, 30, [self.button_random_enabled_img], self.pygame
+            200, 520, 80, 30, [button_random_enabled_img], self.pygame
         )
+        self.button_random.set_disabled_image(button_random_disabled_img)
 
         self.buttons.add(self.button_reset, self.button_start_stop, self.button_random)
 
@@ -101,7 +102,7 @@ class GameView:
         if self.is_in_grid(pos):
             x = math.floor(pos[0] / self.box_x)
             y = math.floor(pos[1] / self.box_y)
-            print(str(pos) + " " + str(x) + " " + str(y))
+           
             return (y, x)
         else:
             return 0.0

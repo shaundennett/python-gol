@@ -27,23 +27,29 @@ class GameController:
         pygame.init()
         self.model = gol_model.Game_of_life_model(self.cols, self.rows)
         self.view = gol_view.GameView(self.model, pygame)
+        self.view.button_random.enable()
         self.setup_event_listeners()
         self.main_loop()
 
     def setup_event_listeners(self):
+
         self.view.button_start_stop.add_command(self.start_stop_clicked)
         self.view.button_reset.add_command(self.reset_clicked)
+        self.view.button_random.add_command(self.random_clicked)
 
     def start_stop_clicked(self, val):
         print("Button state :" + str(val))
         if val == 0:
             self.draw = False
+            self.view.button_random.enable()
         else:
             self.draw = True
+            self.view.button_random.disable() 
+
+
     def random_clicked(self, val):
         print("Button state :" + str(val))
-        if val == 1:
-            self.model.randomize_grid()
+        self.model.randomize_grid()
 
 
     def reset_clicked(self, state):
